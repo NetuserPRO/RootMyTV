@@ -106,10 +106,9 @@
       // Attempt to go through original pre-2021/06 route. This will fail on patched TVs.
       download('files/jail_native_devmode.conf', '/mnt/lg/cmn_data/etc/', 'jail_native_devmode.conf', function () {
         log("Original start-devmode.sh overwrite succeeded, using original chain...");
-        bootstrapStage3();
       }, function () {
         log("Original start-devmode.sh overwrite failed, attempting v2 exploit...");
-        download('files/jumpstart.sh', '/mnt/lg/cmn_data/wam/', 'extra_conf.sh', function () {
+        download('files/jail_native_devmode.conf', '/media/developer', 'jail_app.conf', function () {
           bootstrapStage3();
         });
       });
