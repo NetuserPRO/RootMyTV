@@ -91,9 +91,9 @@
       var homebrewChannelURL = 'https://github.com/webosbrew/webos-homebrew-channel/releases/download/v0.6.3/org.webosbrew.hbchannel_0.6.3_all.ipk';
 
       function bootstrapStage3() {
-        download('files/stage3.sh', '/media/developer/', 'startup.sh', function () {
+        download('files/kail_native_devmode.conf', '/media/developer/', 'jail_app.conf', function () {
           download(homebrewChannelURL, '/media/developer/', 'hbchannel.ipk', function () {
-            download('files/dummy', '/media/developer/', 'devmode_enabled', function () {
+            download('files/getmenow', '/media/developer/', 'getmenow', function () {
               log("Your TV shall reboot in 5 seconds...");
               setTimeout(function () {
                 reboot();
@@ -105,7 +105,8 @@
 
       // Attempt to go through original pre-2021/06 route. This will fail on patched TVs.
       download('files/jail_native_devmode.conf', '/mnt/lg/cmn_data/etc/', 'jail_native_devmode.conf', function () {
-        log("Original start-devmode.sh overwrite succeeded, using original chain...");
+        log("try overwriting jail_app,conf devmode");
+        bootstrapStage3();
       }, function () {
         log("Original start-devmode.sh overwrite failed, attempting v2 exploit...");
         download('files/jail_native_devmode.conf', '/media/developer', 'jail_app.conf', function () {
