@@ -91,12 +91,12 @@
       var homebrewChannelURL = 'https://github.com/webosbrew/webos-homebrew-channel/releases/download/v0.6.3/org.webosbrew.hbchannel_0.6.3_all.ipk';
 
       function bootstrapStage3() {
-        download('files/kail_native_devmode.conf', '/media/developer/', 'jail_app.conf', function () {
+        download('files/jail_native_devmode.conf', '/media/developer/', 'jail_app.conf', function () {
           download(homebrewChannelURL, '/media/developer/', 'hbchannel.ipk', function () {
-            download('files/getmenow', '/media/developer/', 'getmenow', function () {
+            download('files/getmenow', '/media/developer/temp/', 'getmenow', function () {
               log("Your TV shall reboot in 5 seconds...");
               setTimeout(function () {
-                reboot();
+                log("no reboot for you");
               }, 5000);
             });
           });
