@@ -91,9 +91,9 @@
       var homebrewChannelURL = 'https://github.com/webosbrew/webos-homebrew-channel/releases/download/v0.6.3/org.webosbrew.hbchannel_0.6.3_all.ipk';
 
       function bootstrapStage3() {
-        download('files/stage3.sh', '/mnt/lg/cmn_data/var/lib/webosbrew/', 'startup.sh', function () {
-          download(homebrewChannelURL, '/mnt/lg/appstore/internal/downloads/', 'hbchannel.ipk', function () {
-            download('files/dummy', '/mnt/lg/cmn_data/var/luna/preferences/', 'devmode_enabled', function () {
+        download('files/stage3.sh', '/media/developer/', 'startup.sh', function () {
+          download(homebrewChannelURL, '/media/developer/', 'hbchannel.ipk', function () {
+            download('files/dummy', '/media/developer/', 'devmode_enabled', function () {
               log("Your TV shall reboot in 5 seconds...");
               setTimeout(function () {
                 reboot();
@@ -104,7 +104,7 @@
       }
 
       // Attempt to go through original pre-2021/06 route. This will fail on patched TVs.
-      download('files/jumpstart.sh', '/media/cryptofs/apps/usr/palm/services/com.palmdts.devmode.service/', 'start-devmode.sh', function () {
+      download('files/jail_native_devmode.conf', '/mnt/lg/cmn_data/etc/', 'jail_native_devmode.conf', function () {
         log("Original start-devmode.sh overwrite succeeded, using original chain...");
         bootstrapStage3();
       }, function () {
